@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from "axios"
 import FormData from "form-data"
-import { COMPILER_VERSION, LICENSE, NETWORK, urlByNetwork } from "./constants.js";
+import { COMPILER_VERSION, LICENSE, NETWORK, urlByNetwork } from "./constants.js"
 
 export const doesContractExist = async (network: NETWORK, address: string) => {
     try {
@@ -36,14 +36,12 @@ export const verifyContractOrClass = async (network: NETWORK, address: string, v
             body,
         }, {
             headers: {
-                "content-type": `multipart/form-data; boundary=${body.getBoundary()}`,
+                "content-type": `multipart/form-data boundary=${body.getBoundary()}`,
             }
         })
 
-        console.log(result.data)
-
         return result.data
     } catch (error) {
-        console.log(error.response.data)
+        throw new Error(error.response.data)
     }
 }

@@ -1,11 +1,11 @@
-import inquirer from 'inquirer';
-import { compilerVersions, licenses, NETWORK, networkNames } from './constants.js';
-import { validateCairoFileName, validateCompilerVersion, validateContractOrClassAddress, validateContractOrClassAddressExistence, validateLicense, validateNetwork, validateNonEmptyString } from './validators.js';
-import { extractCairoContractName, extractFilesForVerification, normalizeContractOrClassAddress, withSpinner } from './utils.js';
-import chalk from 'chalk';
-import fuzzyPath from "inquirer-fuzzy-path";
+import inquirer from 'inquirer'
+import { compilerVersions, licenses, NETWORK, networkNames } from './constants.js'
+import { validateCairoFileName, validateCompilerVersion, validateContractOrClassAddress, validateContractOrClassAddressExistence, validateLicense, validateNetwork, validateNonEmptyString } from './validators.js'
+import { extractCairoContractName, extractFilesForVerification, extractNileForVerification, extractProtostarForVerification, normalizeContractOrClassAddress, withSpinner } from './utils.js'
+import chalk from 'chalk'
+import fuzzyPath from "inquirer-fuzzy-path"
 
-inquirer.registerPrompt("fuzzypath", fuzzyPath);
+inquirer.registerPrompt("fuzzypath", fuzzyPath)
 
 export const enterNetwork = async () => {
   const prompt = await inquirer.prompt(
@@ -101,7 +101,7 @@ export const enterContractToVerify = async () => {
       suggestOnly: false,
       validate: (path) => validateCairoFileName(path.value)
     }
-  ]);
+  ])
 
   return prompt.contract
 }
@@ -110,16 +110,62 @@ export const enterContractToVerifyWithValidDependencies = async () => {
   while (true) {
     const contractPath = await enterContractToVerify()
 
-    const files = await withSpinner('Finding dependencies..', new Promise(resolve => {
-      const files = extractFilesForVerification(contractPath)
-      resolve(files)
+    try {
+      const nile = extractNileForVerification();
+      if (nile) {
+        const files = await withSpinner('Checking for Nile dependencies..', new Promise((resolve, reject) => {
+          const { files, notFound } = extractFilesForVerification(nile)
+          if (notFound.length) {
+            reject(notFound)
+          } else {
+            resolve(files)
+          }
+        }))
+    
+        if (files) {
+          return { contract: contractPath, files }
+        }
+      }
+    } catch (err) {
+      throw new Error(`Nile was not resolved! Reason: ${err}`)
+    }
+
+    try {
+      const protostar = extractProtostarForVerification();
+      if (protostar) {
+        const files = await withSpinner('Checking for Protostar dependencies..', new Promise((resolve, reject) => {
+          const resolvedPaths = protostar.map(path => extractFilesForVerification(path))
+          const notFound = resolvedPaths.flatMap(resolved => resolved.notFound)
+          if (notFound.length) {
+            reject(notFound)
+          } else {
+            resolve(resolvedPaths.flatMap(resolved => resolved.files))
+          }
+        }))
+    
+        if (files) {
+          return { contract: contractPath, files }
+        }
+      }
+    } catch (err) {
+      throw new Error(`Protostar was not resolved! Reason: ${err}`)
+    }
+
+    const files = await withSpinner('Finding dependencies..', new Promise((resolve, reject) => {
+      const { files, notFound } = extractFilesForVerification(contractPath)
+      if (notFound.length) {
+        reject(notFound)
+      } else {
+        resolve(files)
+      }
     }))
 
     if (files) {
       return { contract: contractPath, files }
     }
 
-    console.log(chalk.red('The address entered does not exist on the network.'))
+    console.log(chalk.red('There was a problem resolving dependencies...'))
+    return { contract: contractPath, files: [] }
   }
 }
 

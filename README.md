@@ -1,2 +1,3 @@
-# voyager-cli-verifier
-A CLI Verifier Package for Voyager
+# Voyager CLI Verifier
+
+A CLI Verifier Package for Voyager supporting Nile and Protostar!

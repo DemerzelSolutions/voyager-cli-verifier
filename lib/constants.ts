@@ -45,3 +45,15 @@ export enum LICENSE {
 }
 export const licenses = Object.values(LICENSE)
 
+export enum PYTHON_VERSION {
+    "python3.7" = "python3.7", 
+    "python3.8" = "python3.8", 
+    "python3.9" = "python3.9", 
+    "python3.10" = "python3.10", 
+    "python3.11" = "python3.11"
+}
+export const pythonVersions = Object.values(PYTHON_VERSION)
+
+export const PROTOSTAR_FILE_NAME = "protostar.toml"
+export const NILE_FOLDER_NAME = "contracts"
+

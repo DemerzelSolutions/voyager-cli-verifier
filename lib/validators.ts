@@ -1,4 +1,4 @@
-import { BigNumber, utils } from 'ethers';
+import { BigNumber, utils } from 'ethers'
 import { compilerVersions, COMPILER_VERSION, LICENSE, licenses, NETWORK, networkNames } from "./constants.js"
 import { doesClassExist, doesContractExist } from "./requests.js"
 
