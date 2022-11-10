@@ -1,6 +1,13 @@
 {
   "name": "voyager-verifier",
   "version": "0.0.1",
+  "bugs": {
+    "url": "https://github.com/DemerzelSolutions/voyager-cli-verifier/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DemerzelSolutions/voyager-cli-verifier.git"
+  },
   "description": "Contract and class verifier for Voyager block explorer.",
   "main": "dist/index.js",
   "scripts": {

@@ -1,12 +1,12 @@
 # Voyager CLI Verifier
 
-![Voyager](./assets/voyager.png)
+![Voyager](https://raw.githubusercontent.com/DemerzelSolutions/voyager-cli-verifier/master/assets/voyager.png)
 
 ## What is it?
 
 A CLI Verifier Package for **[Voyager](https://voyager.online)**, the block explorer for **Starknet**, on top of our **[GUI Verifier](https://voyager.online/verify)** for better user experience with added support for **Nile** and **Protostar**!
 
-![GUI Verify](./assets/gui-verify.png)
+![GUI Verify](https://raw.githubusercontent.com/DemerzelSolutions/voyager-cli-verifier/master/assets/gui-verify.png)
 
 ## Installation
 
@@ -29,7 +29,7 @@ npx voyager-verifier
 1. Resolve any unresolved paths/dependencies in your project
 1. You are done!
 
-![CLI Verify](./assets/cli-verify.gif)
+![CLI Verify](https://raw.githubusercontent.com/DemerzelSolutions/voyager-cli-verifier/master/assets/cli-verify.gif)
 
 ## Contact us
 - **[Twitter](https://twitter.com/0xvoyageronline)**
