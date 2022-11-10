@@ -42,6 +42,6 @@ export const verifyContractOrClass = async (network: NETWORK, address: string, v
 
         return result.data
     } catch (error) {
-        throw new Error(error.response.data)
+        throw new Error(error.response.data.message)
     }
 }
