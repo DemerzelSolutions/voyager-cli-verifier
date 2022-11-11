@@ -1,6 +1,6 @@
 {
-  "name": "voyager-verifier",
-  "version": "0.0.3",
+  "name": "voyager-verify",
+  "version": "0.0.1",
   "bugs": {
     "url": "https://github.com/DemerzelSolutions/voyager-cli-verifier/issues"
   },
@@ -39,6 +39,6 @@
     "typescript": "^4.8.3"
   },
   "bin": {
-    "voyager-verifier": "./dist/index.js"
+    "voyager-verify": "./dist/index.js"
   }
 }

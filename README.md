@@ -4,28 +4,25 @@
 
 ## What is it?
 
-A CLI Verifier Package for **[Voyager](https://voyager.online)**, the block explorer for **Starknet**, on top of our **[GUI Verifier](https://voyager.online/verify)** for better user experience with added support for **Nile** and **Protostar**!
+A CLI Verifier Package for **[Voyager](https://voyager.online)**, the block explorer for **Starknet**, on top of our **[GUI Verifier](https://voyager.online/verify)** for better user experience.
 
 ![GUI Verify](https://raw.githubusercontent.com/DemerzelSolutions/voyager-cli-verifier/master/assets/gui-verify.png)
 
 ## Installation
 
 ```
-npm i -g voyager-verifier
+npm i -g voyager-verify
 ```
 
 or
 
 ```
-npx voyager-verifier
+npx voyager-verify
 ```
 
 ## Usage
 
-1. Prepare if you are using a third-party tool:
-    - **Protostar**: run `protostar install`
-    - **Nile**: activate your python virtual environment
-1. Run `voyager-verifier` in you project's root folder and follow the instructions
+1. Run `voyager-verify` in you project's root folder and follow the instructions
 1. Resolve any unresolved paths/dependencies in your project
 1. You are done!
 
